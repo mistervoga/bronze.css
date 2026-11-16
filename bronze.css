@@ -24,11 +24,9 @@
   --t-2xl:2.449962rem;
   --t-3xl:3.302776rem;
   --sans:Verdana,Geneva,system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono","JetBrains Mono",monospace;
-  --page:#eeeae5;--ink:#111;--ink-2:#444;--muted:#767676;--line:#ded8d1;--accent:#4d0812;
+  --page:#ebe3d6;--ink:#111;--ink-2:#444;--muted:#767676;--line:#d9cfc0;--accent:#3a050c;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--page:#171513;--ink:#ece8e3;--ink-2:#c4beb7;--muted:#958e86;--line:#37322d;--accent:#d27a86;color-scheme:dark;}}
-:root[data-theme=dark]{--page:#171513;--ink:#ece8e3;--ink-2:#c4beb7;--muted:#958e86;--line:#37322d;--accent:#d27a86;color-scheme:dark;}
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}

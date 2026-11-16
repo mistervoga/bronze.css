@@ -270,9 +270,7 @@ func write(w io.Writer) {
 		p("  --t-%s:%srem;\n", t.name, pow(t.exp))
 	}
 	p("  --sans:Verdana,Geneva,system-ui,sans-serif;--mono:ui-monospace,\"Cascadia Mono\",\"JetBrains Mono\",monospace;\n")
-	p("  --page:#eeeae5;--ink:#111;--ink-2:#444;--muted:#767676;--line:#ded8d1;--accent:#4d0812;\n  color-scheme:light;\n}\n")
-	dark := "--page:#171513;--ink:#ece8e3;--ink-2:#c4beb7;--muted:#958e86;--line:#37322d;--accent:#d27a86;color-scheme:dark;"
-	p("@media (prefers-color-scheme:dark){:root:not([data-theme=light]){%s}}\n:root[data-theme=dark]{%s}\n\n", dark, dark)
+	p("  --page:#ebe3d6;--ink:#111;--ink-2:#444;--muted:#767676;--line:#d9cfc0;--accent:#3a050c;\n  color-scheme:light;\n}\n\n")
 
 	// base
 	p("*,*::before,*::after{box-sizing:border-box}\n")

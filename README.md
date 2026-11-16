@@ -171,7 +171,7 @@ In React the attribute is `className` instead of `class`:
 
 ### Step 4: Check that it works
 
-Open the page. The background must be **light beige** (`#eeeae5`), or **almost black** with a dark system theme. If it is white, the CSS file was not found; see [Troubleshooting](#troubleshooting).
+Open the page. The background must be **light beige** (`#ebe3d6`). If it is white, the CSS file was not found; see [Troubleshooting](#troubleshooting).
 
 ## How the scale works
 
@@ -280,9 +280,6 @@ Every value is a CSS variable. Override them **after** linking bronze.css, in yo
 }
 ```
 
-- **Dark theme:** it follows the system setting automatically.
-  - Always dark: `<html data-theme="dark">`.
-  - Always light: `<html data-theme="light">`.
 - **Breakpoints:** they stay at u = 9 px even if you change `--u`. Media queries cannot read CSS variables.
 
 ## Building it yourself
