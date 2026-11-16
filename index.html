@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bronze.css</title>
+<link rel="stylesheet" href="bronze.css">
+</head>
+<body>
+<!-- Demo: only classes from bronze.css. Inline style only where a token itself is shown. -->
+<header class="bg-accent">
+  <div class="container cluster-3 py-2">
+    <b class="text-lg" style="color:#e8e2dc">bronze.css</b>
+    <span class="text-sm" style="color:#c9bfb6">B = (3+√13)/2 = 3.302776 · everything in powers of B</span>
+  </div>
+</header>
+
+<main class="container flow-4 py-4">
+
+  <section class="cols-1 md:cols-b1 gap-x-4 gap-y-3 items-end">
+    <div class="flow-2">
+      <h1>One ratio, every measure</h1>
+      <p class="text-lg text-ink-2 measure">Spacing is u·B<sup>k</sup>, font sizes are 1rem·B<sup>k/4</sup>, and columns, aspect ratios and breakpoints follow B as well. Nothing is chosen freely except the base unit u = 9px.</p>
+    </div>
+    <div class="flow-1 border-l pl-3">
+      <p class="text-sm text-muted uppercase">Derivation</p>
+      <p class="font-mono text-sm">h(3,0) = [3; 3, 3, …]</p>
+      <p class="font-mono text-sm">H<sub>p</sub>(3,0): 3, 10/3, 33/10, 109/33 …</p>
+      <p class="font-mono text-sm">B² = 3B + 1 · B = 3 + 1/B</p>
+    </div>
+  </section>
+
+  <section class="flow-3">
+    <h2>Spacing</h2>
+    <p class="text-ink-2 measure">Whole steps grow by B, half steps by √B. Step 2 is the base unit u.</p>
+    <div class="stack-1 font-mono text-sm tabular">
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-1</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-1)"></i><span class="text-muted">u/B</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-1.5</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-1-5)"></i><span class="text-muted">u/√B</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-2</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-2)"></i><span class="text-muted">u</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-2.5</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-2-5)"></i><span class="text-muted">u·√B</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-3</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-3)"></i><span class="text-muted">u·B</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-3.5</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-3-5)"></i><span class="text-muted">u·B√B</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-4</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-4)"></i><span class="text-muted">u·B²</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-4.5</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-4-5)"></i><span class="text-muted">u·B²√B</span></div>
+      <div class="cluster-2"><span class="w-minor-2 nowrap">p-5</span><i class="bg-ink" style="height:var(--s-2);width:var(--s-5)"></i><span class="text-muted">u·B³</span></div>
+    </div>
+  </section>
+
+  <section class="flow-3">
+    <h2>Type</h2>
+    <div class="stack-2">
+      <p class="text-3xl leading-tight">text-3xl · B rem</p>
+      <p class="text-2xl leading-tight">text-2xl · B<sup>¾</sup> rem</p>
+      <p class="text-xl">text-xl · √B rem</p>
+      <p class="text-lg">text-lg · B<sup>¼</sup> rem</p>
+      <p class="text-base">text-base · 1 rem</p>
+      <p class="text-sm">text-sm · B<sup>−¼</sup> rem</p>
+      <p class="text-xs">text-xs · B<sup>−½</sup> rem</p>
+    </div>
+  </section>
+
+  <section class="flow-3">
+    <h2>Grids</h2>
+    <div class="flow-2 font-mono text-sm">
+      <p class="text-muted">cols-b · B : 1</p>
+      <div class="cols-b gap-2"><div class="bg-line p-2">B</div><div class="bg-line p-2">1</div></div>
+      <p class="text-muted">cols-b1 · (B−1) : 1</p>
+      <div class="cols-b1 gap-2"><div class="bg-line p-2">B − 1</div><div class="bg-line p-2">1</div></div>
+      <p class="text-muted">cols-b3 · (B−1) : 1 : 1</p>
+      <div class="cols-b3 gap-2"><div class="bg-line p-2">B − 1</div><div class="bg-line p-2">1</div><div class="bg-line p-2">1</div></div>
+      <p class="text-muted">cols-3b · 1 : 1 : 1 : 1/B, since B = 3 + 1/B</p>
+      <div class="cols-3b gap-2"><div class="bg-line p-2">1</div><div class="bg-line p-2">1</div><div class="bg-line p-2">1</div><div class="bg-line p-2 truncate">1/B</div></div>
+      <p class="text-muted">cols-1 md:cols-2 lg:cols-4 · responsive</p>
+      <div class="cols-1 md:cols-2 lg:cols-4 gap-2"><div class="bg-line p-2">a</div><div class="bg-line p-2">b</div><div class="bg-line p-2">c</div><div class="bg-line p-2">d</div></div>
+    </div>
+  </section>
+
+  <section class="flow-3">
+    <h2>Aspect ratios</h2>
+    <div class="cols-1 md:cols-3 gap-3 items-end font-mono text-sm">
+      <div class="flow-1"><div class="aspect-b bg-line"></div><p>aspect-b · B : 1</p></div>
+      <div class="flow-1"><div class="aspect-b1 bg-line"></div><p>aspect-b1 · (B−1) : 1</p></div>
+      <div class="flow-1"><div class="aspect-sqrt-b bg-line"></div><p>aspect-sqrt-b · √B : 1</p></div>
+    </div>
+  </section>
+
+  <section class="flow-3">
+    <h2>Building blocks</h2>
+    <div class="cols-1 md:cols-b1 gap-4">
+      <article class="flow-2 border-t pt-3">
+        <h3>stack · cluster · flow</h3>
+        <p class="text-ink-2"><code class="font-mono">stack-N</code> stacks with gap N, <code class="font-mono">cluster-N</code> lines up in a wrapping row, <code class="font-mono">flow-N</code> puts space N between siblings.</p>
+        <div class="cluster-2 text-sm"><span class="border rounded-1 px-2 py-1">Quantifier</span><span class="border rounded-1 px-2 py-1">Context</span><span class="border rounded-1 px-2 py-1">Truth</span></div>
+      </article>
+      <aside class="flow-2 border-t pt-3">
+        <h3>Sidebar</h3>
+        <p class="text-ink-2 text-sm">This column takes 1 part of the <code class="font-mono">cols-b1</code> grid, the left one B − 1 parts.</p>
+        <p class="text-sm"><a href="#" class="underline">Underlined link</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="border-t pt-3 text-sm text-muted">
+    <p>Generated with <code class="font-mono">go run ./gen -o bronze.css</code>. Dark theme via <code class="font-mono">prefers-color-scheme</code> or <code class="font-mono">data-theme</code>.</p>
+  </footer>
+</main>
+</body>
+</html>
