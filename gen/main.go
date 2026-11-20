@@ -213,16 +213,16 @@ func utilities() []rule {
 func plain() []rule {
 	var r []rule
 	add := func(c, d string) { r = append(r, rule{c, d}) }
-	for _, c := range []string{"ink", "ink-2", "muted", "accent", "page", "line"} {
+	// black and white only; tint is the faint grey behind boxes.
+	for _, c := range []string{"ink", "page", "tint"} {
 		add("text-"+c, "color:var(--"+c+")")
 		add("bg-"+c, "background-color:var(--"+c+")")
 	}
-	add("border", "border:1px solid var(--line)")
+	add("border", "border:1px solid var(--ink)")
 	for _, s := range []struct{ k, p string }{{"t", "top"}, {"r", "right"}, {"b", "bottom"}, {"l", "left"}} {
-		add("border-"+s.k, "border-"+s.p+":1px solid var(--line)")
+		add("border-"+s.k, "border-"+s.p+":1px solid var(--ink)")
 	}
 	add("border-0", "border:0")
-	add("border-accent", "border-color:var(--accent)")
 	add("rounded-0", "border-radius:0")
 	add("rounded-1", "border-radius:var(--s-1)")
 	add("rounded-2", "border-radius:var(--s-2)")
@@ -269,8 +269,8 @@ func write(w io.Writer) {
 	for _, t := range typeScale {
 		p("  --t-%s:%srem;\n", t.name, pow(t.exp))
 	}
-	p("  --sans:Verdana,Geneva,system-ui,sans-serif;--mono:ui-monospace,\"Cascadia Mono\",\"JetBrains Mono\",monospace;\n")
-	p("  --page:#ebe3d6;--ink:#111;--ink-2:#444;--muted:#767676;--line:#d9cfc0;--accent:#3a050c;\n  color-scheme:light;\n}\n\n")
+	p("  --sans:sans-serif;--mono:monospace;\n")
+	p("  --page:#fff;--ink:#000;--tint:#f5f5f5;\n  color-scheme:light;\n}\n\n")
 
 	// base
 	p("*,*::before,*::after{box-sizing:border-box}\n")
@@ -279,7 +279,15 @@ func write(w io.Writer) {
 	p("h1,h2,h3,h4,p,figure,blockquote,dl,dd,ul,ol{margin:0}\n")
 	p("h1{font-size:var(--t-3xl);line-height:%s}h2{font-size:var(--t-xl);line-height:%s}h3{font-size:var(--t-lg)}h4{font-size:var(--t-base)}\n", pow(0.25), pow(0.25))
 	p("img,svg,video,canvas{display:block;max-width:100%%}\n")
-	p("input,select,textarea,button{font:inherit;color:inherit}\n")
+	// buttons, inputs and tables are typography only: no fills, no borders, no radii.
+	p("input,select,textarea,button{font:inherit;color:inherit;background:none;border:0;border-radius:0;padding:0;margin:0}\n")
+	p("button{font-weight:700;text-decoration:underline;text-underline-offset:calc(1em / var(--b2) * 2);cursor:pointer}\n")
+	p("button:disabled{text-decoration:line-through;cursor:default}\n")
+	p("input,select,textarea{width:100%%;text-decoration:underline dotted;text-underline-offset:calc(1em / var(--b2) * 2)}\n")
+	p("::placeholder{color:inherit;font-style:italic;opacity:1}\n")
+	p("table{border-collapse:collapse;width:100%%;font-variant-numeric:tabular-nums}\n")
+	p("th,td{text-align:left;vertical-align:baseline;padding:var(--s-1-5) var(--s-2-5) var(--s-1-5) 0}\n")
+	p("th{font-weight:700}thead th{font-size:var(--t-sm);text-transform:uppercase;letter-spacing:calc(1em / var(--b3))}\n")
 	p("a{color:inherit}\n:focus-visible{outline:1px solid var(--ink);outline-offset:var(--s-1)}\n")
 	p("@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}\n\n")
 
@@ -316,7 +324,7 @@ func classNames() []string {
 }
 
 // Version is printed in the stylesheet header.
-const Version = "1.0.0"
+const Version = "1.1.0"
 
 // main writes to -o (default stdout). -o avoids shell redirection, which in
 // Windows PowerShell 5.1 would write UTF-16 instead of UTF-8.

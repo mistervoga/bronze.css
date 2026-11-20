@@ -3,6 +3,7 @@ package main
 import (
 	"math"
 	"math/big"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -77,5 +78,15 @@ func TestClassesAndVariants(t *testing.T) {
 	}
 	if strings.Count(out, "{") != strings.Count(out, "}") {
 		t.Fatal("unbalanced braces")
+	}
+}
+
+// Black and white only: the stylesheet may use exactly three colours.
+func TestMonochrome(t *testing.T) {
+	out := css()
+	for _, c := range regexp.MustCompile(`#[0-9a-fA-F]{3,6}\b`).FindAllString(out, -1) {
+		if c != "#fff" && c != "#000" && c != "#f5f5f5" {
+			t.Errorf("colour %s", c)
+		}
 	}
 }

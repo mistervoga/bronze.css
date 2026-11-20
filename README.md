@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://github.com/mistervoga/bronze.css/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/mistervoga/bronze.css?style=social"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-b08d57.svg"></a>
-  <img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-7a4a23.svg">
+  <img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-7a4a23.svg">
   <img alt="gzip 6.4 KB" src="https://img.shields.io/badge/gzip-6.4%20KB-a0662f.svg">
   <img alt="Zero dependencies" src="https://img.shields.io/badge/dependencies-0-3f7162.svg">
   <img alt="Go 1.21 or newer" src="https://img.shields.io/badge/Go-%E2%89%A5%201.21-00ADD8.svg?logo=go&logoColor=white">
@@ -60,7 +60,7 @@ The logo shows the core idea. A rectangle with ratio B : 1 splits into **three s
    ```html
    <main class="container flow-3 py-4">
      <h1>Hello</h1>
-     <p class="text-lg text-ink-2 measure">Everything in the bronze ratio.</p>
+     <p class="text-lg measure">Everything in the bronze ratio.</p>
    </main>
    ```
 
@@ -143,9 +143,9 @@ my-project/
     <section class="cols-1 md:cols-b1 gap-4">
       <article class="stack-2">
         <h2>Content</h2>
-        <p class="text-ink-2">Wide column: (B − 1) parts.</p>
+        <p>Wide column: (B − 1) parts.</p>
       </article>
-      <aside class="border-l pl-3 text-sm text-muted">Narrow column: 1 part.</aside>
+      <aside class="bg-tint p-3 text-sm">Narrow column: 1 part.</aside>
     </section>
   </main>
 </body>
@@ -171,7 +171,7 @@ In React the attribute is `className` instead of `class`:
 
 ### Step 4: Check that it works
 
-Open the page. The background must be **light beige** (`#ebe3d6`). If it is white, the CSS file was not found; see [Troubleshooting](#troubleshooting).
+Open the page. The text must be in a **sans-serif** font and links, buttons and inputs must be underlined. If the text is in a serif font, the CSS file was not found; see [Troubleshooting](#troubleshooting).
 
 ## How the scale works
 
@@ -219,6 +219,18 @@ Line heights: `leading-tight` B<sup>¼</sup> ≈ 1.35, `leading-normal` B<sup>�
 
 It is **mobile first**. `class="cols-1 md:cols-2 lg:cols-b3"` gives one column on a phone, two on a tablet, and three in the ratio (B−1) : 1 : 1 on a desktop.
 
+## Elements
+
+bronze.css is **black and white**. Only three colours exist: ink `#000`, page `#fff` and tint `#f5f5f5` for boxes. The font is the generic `sans-serif`.
+
+Buttons, inputs and tables are styled with **typography only**, without fills, borders or radii:
+
+| Element | Look |
+|---|---|
+| `button` | bold, underlined; `:disabled` is struck through |
+| `input`, `select`, `textarea` | full width, dotted underline; placeholder in italics |
+| `table` | full width, tabular numbers; `th` bold, `thead th` small caps-style uppercase; cell padding from the bronze steps |
+
 ## Classes
 
 `N` is a step from the spacing table: `0 1 1.5 2 2.5 3 3.5 4 4.5 5`. In HTML you write the dot as is, e.g. `class="p-2.5"`.
@@ -239,8 +251,8 @@ It is **mobile first**. `class="cols-1 md:cols-2 lg:cols-b3"` gives one column o
 | Aspect ratio | `aspect-b` B : 1, `aspect-b1` (B−1) : 1, `aspect-sqrt-b` √B : 1, `aspect-square` | `aspect-b1` |
 | Text | `text-xs … text-3xl`, `leading-*`, `text-left text-center text-right`, `font-normal font-bold font-mono font-sans`, `uppercase truncate nowrap tabular` | `text-sm font-mono` |
 | Position | `static relative absolute sticky top-0`, `overflow-auto overflow-hidden` | `sticky top-0` |
-| Colour | `text-ink text-ink-2 text-muted text-accent text-page text-line`, plus `bg-…` with the same names | `bg-accent text-page` |
-| Border | `border border-t border-r border-b border-l border-0 border-accent`, `rounded-0 rounded-1 rounded-2 rounded-full` | `border-t pt-3` |
+| Colour | black and white only: `text-ink text-page`, `bg-ink bg-page`, plus `bg-tint`, the faint grey for boxes (`#f5f5f5`) | `bg-tint p-3` |
+| Border | `border border-t border-r border-b border-l border-0` (1px black), `rounded-0 rounded-1 rounded-2 rounded-full` | `border-t pt-3` |
 | Other | `underline no-underline sr-only` | `sr-only` |
 
 The `md:` and `lg:` prefixes exist for every layout, spacing, size and text class. Colours and borders have no prefixes.
@@ -254,17 +266,26 @@ The `md:` and `lg:` prefixes exist for every layout, spacing, size and text clas
   <aside class="border-l pl-3">…</aside>
 </div>
 
-<!-- Button row -->
-<div class="cluster-2">
-  <button class="border rounded-1 px-2.5 py-1">Cancel</button>
-  <button class="bg-accent text-page rounded-1 px-2.5 py-1 border-0">Save</button>
+<!-- Button row: buttons are typography only (bold, underlined), no classes needed -->
+<div class="cluster-3">
+  <button>Save</button>
+  <button type="reset">Cancel</button>
 </div>
+
+<!-- Form field: inputs are typography only (dotted underline) -->
+<label class="stack-1">
+  <span class="text-sm uppercase">E-mail</span>
+  <input type="email" placeholder="name@example.org">
+</label>
+
+<!-- Box: faint grey background, bronze padding -->
+<div class="bg-tint p-3">…</div>
 
 <!-- Card with an image in ratio (B − 1) : 1 -->
 <article class="stack-2">
   <img class="aspect-b1 w-full" src="image.jpg" alt="…" style="object-fit:cover">
   <h3>Title</h3>
-  <p class="text-sm text-ink-2">Text</p>
+  <p class="text-sm">Text</p>
 </article>
 ```
 
@@ -275,8 +296,8 @@ Every value is a CSS variable. Override them **after** linking bronze.css, in yo
 ```css
 :root {
   --u: 0.625rem;        /* everything slightly larger: u = 10 px */
-  --accent: #6b3e1f;    /* your own accent colour */
-  --sans: "Inter", system-ui, sans-serif;
+  --tint: #f0f0f0;      /* a slightly stronger box grey */
+  --sans: "Inter", sans-serif;
 }
 ```
 
@@ -359,7 +380,7 @@ bronze.css/
 
 | Problem | Cause and fix |
 |---|---|
-| Page is white, classes have no effect | The path in `<link href="…">` is wrong. Open the developer tools (**F12**, on a Mac **Cmd + Option + I**), tab **Network** or **Console**: if `bronze.css` shows `404`, fix the path. |
+| Text is in a serif font, classes have no effect | The path in `<link href="…">` is wrong. Open the developer tools (**F12**, on a Mac **Cmd + Option + I**), tab **Network** or **Console**: if `bronze.css` shows `404`, fix the path. |
 | File is named `bronze.css.txt` | Windows hides file extensions. In Explorer, enable **View → Show → File name extensions** and rename it. |
 | Changes do not show up | Browser cache. Reload with **Ctrl + F5**, on a Mac **Cmd + Shift + R**. |
 | `go: command not found`, or "The term 'go' is not recognized" | Go is not installed, or the terminal was not reopened after installing. Close the terminal, open it again, run `go version`. |
